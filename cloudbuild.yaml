@@ -1,0 +1,22 @@
+steps:
+# Use the Docker cloud builder image.
+  - name: 'gcr.io/cloud-builders/docker'
+# Build your docker image, use your artifact registry as the name and tag it with the commit SHA.
+    args: ['build', '-t', 
+           'us-central1-docker.pkg.dev/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA', 
+           '.']
+# Push the image to your artifact registry.
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 
+           'us-central1-docker.pkg.dev/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA']
+
+# Cloud SDK setup. 
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: ['run', 'deploy', 
+           'joseph-100625770', '--image', 'us-central1-docker.pkg.dev/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA', 
+           '--region', 'us-central1']  
+
+# Provide image info. 
+images:
+  - 'us-central1-docker.pkg.dev/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA' 
