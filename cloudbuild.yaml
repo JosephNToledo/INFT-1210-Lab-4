@@ -10,13 +10,6 @@ steps:
     args: ['push', 
            'us-central1-docker.pkg.dev/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA']
 
-# Cloud SDK setup. 
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
-    args: ['run', 'deploy', 
-           'toledo-lab4', '--image', 'us-central1-docker.pkg.dev/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA', 
-           '--region', 'us-central1']  
-
 # Provide image info. 
 images:
   - 'us-central1-docker.pkg.dev/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA' 
