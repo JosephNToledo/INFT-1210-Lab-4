@@ -10,6 +10,16 @@ steps:
     args: ['push', 
            'us-central1-docker.pkg.dev/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA']
 
+# Update the container on the GCP VM that was deployed with Terraform.
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - compute
+      - instances
+      - update-container 
+      - toledo-terraform-vm
+      - '--zone=us-central1-a'
+      - '--container-image=gcr.io/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA'
+
 # Provide image info. 
 images:
   - 'us-central1-docker.pkg.dev/cloud-computing-416703/toledo-lab4/toledo-lab4:$COMMIT_SHA' 
