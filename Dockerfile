@@ -12,7 +12,7 @@ RUN pip3 install Flask
 COPY . .
 
 # Expose the port where the Flask app runs (usually 5000)
-EXPOSE 80
+EXPOSE 8080
 
 # Command to run the Flask application
 CMD ["python3", "app.py"]
